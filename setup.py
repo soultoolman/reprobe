@@ -12,7 +12,7 @@ URL = 'https://github.com/soultoolman/reprobe'
 EMAIL = 'soultoolman'
 AUTHOR = 'soultoolman'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -32,7 +32,6 @@ TESTS_REQUIRE = [
 
 # console scripts
 CONSOLE_SCRIPTS = [
-    'reprobe-bowtie=reprobe.__main__:reprobe_bowtie'
 ]
 
 # The rest you shouldn't have to touch too much :)

@@ -31,13 +31,13 @@ class Maps:
 
 
 class Selector:
-    def select(self, matches):
+    def select(self, matches, index):
         raise NotImplementedError
 
 
 class BowtieSelector(Selector):
-    def select(self, matches):
+    def select(self, matches, index):
         maps = Maps()
         for probe_id, gene_ids in matches.probe_id_to_gene_ids():
-            maps.add(probe_id, gene_ids[0])
+            maps.add(probe_id, index.parse_gene_id(gene_ids[0]))
         return maps

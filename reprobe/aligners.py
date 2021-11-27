@@ -56,15 +56,28 @@ class BowtieAligner(Aligner):
         self.command = sh.Command('bowtie')
         self.reader = BowtieMatchReader()
 
-    def run_bowtie(self, index, probe_sequences_file, result_file):
+    def run_bowtie(self, mismatches, index, probe_sequences_file, result_file):
+        mismatches = str(mismatches)
+        index = str(index)
+        probe_sequences_file = str(probe_sequences_file)
+        result_file = str(result_file)
         self.command(
-            '-f', '-v', '0', '--best', index,
-            probe_sequences_file, result_file
+            '-f',
+            '-v', mismatches,
+            '--best',
+            index,
+            probe_sequences_file,
+            result_file
         )
 
-    def align(self, probe_sequences_file, index):
+    def align(self, probe_sequences_file, index, mismatches=2):
         with tempfile.TemporaryDirectory() as tempdir:
             tempdir = Path(tempdir)
             result_file = tempdir / 'bowtie-result.txt'
-            self.run_bowtie(index, probe_sequences_file, result_file)
+            self.run_bowtie(
+                mismatches,
+                index,
+                probe_sequences_file,
+                result_file
+            )
             return self.reader.read(result_file)
